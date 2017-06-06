@@ -21,8 +21,37 @@ multiplier.multiply(1);
 // Each Photo should store the photo's file name and the location the photo was taken in as strings.
 // Create instances of each object defined to prove that your object model works.
 var photoApp = {
-  photoAlbum: [],
-
+  photoAlbum: [
+    {title:"Seoul", location:"South Korea", url:"seoul.jpg"},
+    {title:"New York City", location:"New York", url:"newyork.jpg"},
+    {title:"Washington, DC", location:"USA", url:"washingtondc.jpg"}
+  ],
+  initialize: function() {
+    console.log("initialize");
+    photoApp.activateUserInput()
+  },
+  activateUserInput: function() {
+    var photoSave = document.getElementById('save');
+    photoSave.addEventListener("click", photoApp.savedPhotoInfo);
+  },
+  savedPhotoInfo: function() {
+    console.log("savedPhotoInfo");
+    var photoTitle = document.getElementById('title').value;
+    var photoLocation = document.getElementById('location').value;
+    var photoURL = document.getElementById('url').value;
+    // Make instances
+    var nextPhoto = new photoApp.Photo(photoTitle, photoLocation, photoURL);
+    console.log(nextPhoto);
+    photoApp.photoAlbum.push(nextPhoto);
+    console.log(photoApp.photoAlbum);
+    photoApp.createGallery()
+  },
+  // Photo constructor
+  Photo: function(photoTitle, photoLocation, photoURL) {
+    this.title = photoTitle;
+    this.location = photoLocation;
+    this.url = photoURL;
+  },
   createGallery: function() {
     console.log("createGallery");
     var nextListItem = "";
@@ -30,40 +59,12 @@ var photoApp = {
         nextPhotoGallery = photoApp.photoAlbum[i];
         nextPhotoGalleryTitle = nextPhotoGallery.title;
         nextListItem += "<li id='title_" + i + "'>" + nextPhotoGalleryTitle + "</li>"
-      }
-      // document.getElementById('gallery').appendChild(nextPhotoGalleryTitle);
+      };
       console.log(nextListItem);
-  },
-  initialize: function() {
-    console.log("initialize");
-    photoApp.activateUserInput()
-  },
-  activateUserInput: function() {
-    var photoSave = document.getElementById('save');
-    photoSave.addEventListener("click", photoApp.savedPhotoInfo)
-  },
-  savedPhotoInfo: function() {
-    console.log("savedPhotoInfo");
-    var photoTitle = document.getElementById('title').value;
-    var photoLocation = document.getElementById('location').value;
-    var photoURL = document.getElementById('url').value;
-      function Photo(photoTitle, photoLocation, photoURL) {
-        this.title = photoTitle;
-        this.location = photoLocation;
-        this.url = photoURL;
-      }
-    var nextPhoto = new Photo(photoTitle, photoLocation, photoURL);
-    console.log(nextPhoto);
-    photoApp.photoAlbum.push(nextPhoto);
-    console.log(photoApp.photoAlbum);
-    photoApp.createGallery()
-    }
-}
+    document.getElementById('galleryTitles').innerHTML = nextPhotoGalleryTitle;
+  }
+};
 photoApp.initialize();
-
-
-
-
 
 
 
