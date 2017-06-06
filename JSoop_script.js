@@ -21,6 +21,7 @@ multiplier.multiply(1);
 // Each Photo should store the photo's file name and the location the photo was taken in as strings.
 // Create instances of each object defined to prove that your object model works.
 var photoApp = {
+  photoAlbum: [],
   initialize: function() {
     console.log("initialize");
     photoApp.activateUserInput()
@@ -34,14 +35,16 @@ var photoApp = {
     var photoTitle = document.getElementById('title').value;
     var photoLocation = document.getElementById('location').value;
     var photoURL = document.getElementById('url').value;
-    function Photo(photoTitle, photoLocation, photoURL) {
-      this.title = photoTitle;
-      this.location = photoLocation;
-      this.url = photoURL;
-    }
+      function Photo(photoTitle, photoLocation, photoURL) {
+        this.title = photoTitle;
+        this.location = photoLocation;
+        this.url = photoURL;
+      }
     var nextPhoto = new Photo(photoTitle, photoLocation, photoURL);
     console.log(nextPhoto);
-  }
+    photoApp.photoAlbum.push(nextPhoto);
+    console.log(photoApp.photoAlbum);
+    }
 }
 photoApp.initialize();
 
