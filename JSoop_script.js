@@ -22,6 +22,18 @@ multiplier.multiply(1);
 // Create instances of each object defined to prove that your object model works.
 var photoApp = {
   photoAlbum: [],
+
+  createGallery: function() {
+    console.log("createGallery");
+    var nextListItem = "";
+      for (var i = 0; i < photoApp.photoAlbum.length; i++) {
+        nextPhotoGallery = photoApp.photoAlbum[i];
+        nextPhotoGalleryTitle = nextPhotoGallery.title;
+        nextListItem += "<li id='title_" + i + "'>" + nextPhotoGalleryTitle + "</li>"
+      }
+      // document.getElementById('gallery').appendChild(nextPhotoGalleryTitle);
+      console.log(nextListItem);
+  },
   initialize: function() {
     console.log("initialize");
     photoApp.activateUserInput()
@@ -44,6 +56,7 @@ var photoApp = {
     console.log(nextPhoto);
     photoApp.photoAlbum.push(nextPhoto);
     console.log(photoApp.photoAlbum);
+    photoApp.createGallery()
     }
 }
 photoApp.initialize();
