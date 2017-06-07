@@ -54,31 +54,56 @@ var photoApp = {
   },
   createGallery: function() {
     console.log("createGallery");
-    var nextListItem = "";
-      for (var i = 0; i < photoApp.photoAlbum.length; i++) {
-        nextPhotoGallery = photoApp.photoAlbum[i];
-        nextPhotoGalleryTitle = nextPhotoGallery.title;
-        nextListItem += "<li id='title_" + i + "'>" + nextPhotoGalleryTitle + "</li>"
-      };
-      console.log(nextListItem);
-    document.getElementById('galleryTitles').innerHTML = nextPhotoGalleryTitle;
+    var photoIndex = photoApp.photoAlbum.length-1;
+    var lastPhoto = photoApp.photoAlbum[photoIndex];
+    var photoTitle = lastPhoto.title;
+    var nextListItem = document.createElement('li');
+    nextListItem.id = "title_" + photoIndex;
+    var nextTextItem = document.createTextNode(photoTitle);
+    nextListItem.appendChild(nextTextItem);
+    // var nextListItem = "<li id='title_" + photoIndex + "'>" + photoTitle + "</li>"
+    // console.log(nextListItem);
+    // var t = document.createTextNode(nextListItem);
+    document.getElementById('galleryTitles').appendChild(nextListItem);
   }
 };
 photoApp.initialize();
 
+// for (var i = 0; i < photoApp.photoAlbum.length; i++) {
+//   nextPhotoGallery = photoApp.photoAlbum[i];
+//   nextPhotoGalleryTitle = nextPhotoGallery.title;
+//   nextListItem += "<li id='title_" + i + "'>" + nextPhotoGalleryTitle + "</li>"
+// };
 
 
+// Create a prototypical Person object. From this object, extend a Teacher object and a Student object.
+// Each of these objects should have attributes and methods pertinent to what they describe.
+// Also create a School object that should be able to store instances of students and teachers.
+// Make sure to write code afterwards that creates instances of these objects to make sure that what you've written works well and you're able to store the necessary data in each object.
 
+// ====== Person constructor/parent obj =====
+function Person(name, gender, age) {
+  this.name = name;
+  this.gender = gender;
+  this.age = age;
+}
+// var john = new Person("John", "Male", "30");
+// var mary = new Person("Mary", "Female", "20");
+// console.log("john", john);
+// console.log("mary", mary);
 
+// ====== Teacher constructor/parent's child ========
+function Teacher(name, gender, age, subject) {
+  Person.call(this, name, gender, age);
+  this.subject = subject;
+}
+var mike = new Teacher("Mike", "Male", "58", "history");
+console.log("mike", mike);
 
-
-// Create a prototypical Person object. From this object, extend a Teacher object and a Student object. Each of these objects should have attributes and methods pertinent to what they describe. Also create a School object that should be able to store instances of students and teachers. Make sure to write code afterwards that creates instances of these objects to make sure that what you've written works well and you're able to store the necessary data in each object.
-// Perosn construction
-
-// make instances
-
-// Teacher constructor
-
-// add Person prototype methods
-
-// inherit Person methods
+// ====== Student constructor/parent's child ======
+function Student(name, gender, age, grade) {
+  Person.call(this, name, gender, age);
+  this.grade = grade;
+}
+var kate = new Student("Kate", "Female", "17", "Junior");
+console.log("kate", kate);
