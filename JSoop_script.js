@@ -36,44 +36,79 @@ var photoApp = {
   },
   savedPhotoInfo: function() {
     console.log("savedPhotoInfo");
-    var photoTitle = document.getElementById('title').value;
-    var photoLocation = document.getElementById('location').value;
-    var photoURL = document.getElementById('url').value;
+    var title = document.getElementById('title').value;
+    var location = document.getElementById('location').value;
+    var url = document.getElementById('url').value;
     // Make instances
-    var nextPhoto = new photoApp.Photo(photoTitle, photoLocation, photoURL);
+    var nextPhoto = new photoApp.Photo(title, location, url);
     console.log(nextPhoto);
     photoApp.photoAlbum.push(nextPhoto);
     console.log(photoApp.photoAlbum);
     photoApp.createGallery()
+    photoApp.activatePhotoList()
   },
   // Photo constructor
-  Photo: function(photoTitle, photoLocation, photoURL) {
-    this.title = photoTitle;
-    this.location = photoLocation;
-    this.url = photoURL;
+  Photo: function(title, location, url) {
+    this.title = title;
+    this.location = location;
+    this.url = url;
   },
+  // ====== CREATE GALLERY LIST =======
   createGallery: function() {
     console.log("createGallery");
-    var photoIndex = photoApp.photoAlbum.length-1;
-    var lastPhoto = photoApp.photoAlbum[photoIndex];
-    var photoTitle = lastPhoto.title;
-    var nextListItem = document.createElement('li');
-    nextListItem.id = "title_" + photoIndex;
-    var nextTextItem = document.createTextNode(photoTitle);
-    nextListItem.appendChild(nextTextItem);
-    // var nextListItem = "<li id='title_" + photoIndex + "'>" + photoTitle + "</li>"
-    // console.log(nextListItem);
-    // var t = document.createTextNode(nextListItem);
-    document.getElementById('galleryTitles').appendChild(nextListItem);
+    var nextListItem = "";
+    for (var i = 0; i < photoApp.photoAlbum.length; i++) {
+      nextPhotoGallery = photoApp.photoAlbum[i];
+      nextPhotoGalleryTitle = nextPhotoGallery.title;
+      nextListItem += "<li id='title_" + i + "'>" + nextPhotoGalleryTitle + "</li>"
+    };
+    console.log(nextListItem);
+    document.getElementById('galleryTitles').innerHTML = nextListItem;
+  },
+  // ====== CREATE LINKABLE LINK =======
+  activatePhotoList: function() {
+    console.log("==activatePhotoList==");
+    var listArray = document.getElementById('galleryTitles').getElementsByTagName("li");
+    console.log(listArray);
+    for (var i = 0; i < listArray.length; i++) {
+      nextListItem = listArray[i];
+      console.log(nextListItem);
+      nextListItem.addEventListener("click", photoApp.displaySelectedPhoto);
+    }
+  },
+  // ======= DISPLAY SELECTED PHOTO INFO =======
+  displaySelectedPhoto: function(event){
+    console.log("==displaySelectedPhoto==");
+    var titleID = event.currentTarget.id;
+    console.log(event.currentTarget.id);
+    var titleIndex = titleID.indexOf("_") + 1;
+    console.log(titleIndex);
+    var photoIndex = titleID.substring(titleIndex);
+    console.log(photoIndex);
+    var selectPhoto = photoApp.photoAlbum[photoIndex];
+    console.log(selectPhoto);
+    var photoTags = document.getElementById("selectedTitles").getElementsByTagName("p");
+    console.log(photoTags);
+    photoTags[0].innerText = selectedTitles.title;
+    photoTags[1].innerText = selectedTitles.location;
+    photoTags[2].innerText = selectedTitles.url;
   }
+
 };
 photoApp.initialize();
 
-// for (var i = 0; i < photoApp.photoAlbum.length; i++) {
-//   nextPhotoGallery = photoApp.photoAlbum[i];
-//   nextPhotoGalleryTitle = nextPhotoGallery.title;
-//   nextListItem += "<li id='title_" + i + "'>" + nextPhotoGalleryTitle + "</li>"
-// };
+// ======= Alternate createGallery codes ========
+// var photoIndex = photoApp.photoAlbum.length-1;
+// var lastPhoto = photoApp.photoAlbum[photoIndex];
+// var photoTitle = lastPhoto.title;
+// var nextListItem = document.createElement('li');
+// nextListItem.id = "title_" + photoIndex;
+// var nextTextItem = document.createTextNode(photoTitle);
+// nextListItem.appendChild(nextTextItem);
+// var nextListItem = "<li id='title_" + photoIndex + "'>" + photoTitle + "</li>"
+// console.log(nextListItem);
+// var t = document.createTextNode(nextListItem);
+// document.getElementById('galleryTitles').appendChild(nextListItem);
 
 
 // Create a prototypical Person object. From this object, extend a Teacher object and a Student object.
