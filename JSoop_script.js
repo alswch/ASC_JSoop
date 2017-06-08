@@ -116,29 +116,71 @@ photoApp.initialize();
 // Also create a School object that should be able to store instances of students and teachers.
 // Make sure to write code afterwards that creates instances of these objects to make sure that what you've written works well and you're able to store the necessary data in each object.
 
-// ====== Person constructor/parent obj =====
+var mySchool = {
+  myTeacher: [],
+  myStudent: []
+}
+// ====== Person constructor/parent obj ======
 function Person(name, gender, age) {
   this.name = name;
   this.gender = gender;
   this.age = age;
 }
-// var john = new Person("John", "Male", "30");
-// var mary = new Person("Mary", "Female", "20");
-// console.log("john", john);
-// console.log("mary", mary);
+// ======== Person instances ========
+var john = new Person("John", "Male", "30");
+console.log("john", john);
 
-// ====== Teacher constructor/parent's child ========
+// ======== Person method ========
+Person.prototype.Hey = function() {
+  console.log("==Hey==");
+  var Hey = this.name + " Says Hey!";
+  console.log(Hey);
+}
+john.Hey();
+
+// ====== Teacher constructor ========
 function Teacher(name, gender, age, subject) {
   Person.call(this, name, gender, age);
   this.subject = subject;
 }
+// ====== Teacher inherits Person method ========
+Teacher.prototype = Object.create(Person.prototype);
+
+// ======= Teacher instance ========
 var mike = new Teacher("Mike", "Male", "58", "history");
 console.log("mike", mike);
+mySchool.myTeacher.push(mike);
 
-// ====== Student constructor/parent's child ======
+mike.Hey();
+
+// ======== Teacher method ========
+Teacher.prototype.atten = function() {
+  console.log("==atten==");
+  var atten = this.name + " says: Why are you late?!";
+  console.log(atten);
+}
+mike.atten();
+
+// ====== Student constructor ======
 function Student(name, gender, age, grade) {
   Person.call(this, name, gender, age);
   this.grade = grade;
 }
+// ====== Student inherits Person method ========
+Student.prototype = Object.create(Person.prototype);
+
+// ====== Student instance ======
 var kate = new Student("Kate", "Female", "17", "Junior");
 console.log("kate", kate);
+mySchool.myStudent.push(kate);
+
+kate.Hey();
+
+
+// ====== Student method ========
+Student.prototype.excuse = function() {
+  console.log("==excuse==");
+  var excuse = this.name + " says: My car stopped...";
+  console.log(excuse);
+}
+kate.excuse();
