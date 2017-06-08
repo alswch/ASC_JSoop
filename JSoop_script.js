@@ -65,7 +65,7 @@ var photoApp = {
     console.log(nextListItem);
     document.getElementById('galleryTitles').innerHTML = nextListItem;
   },
-  // ====== CREATE LINKABLE LINK =======
+  // ====== CREATE CLICKABLE LINK =======
   activatePhotoList: function() {
     console.log("==activatePhotoList==");
     var listArray = document.getElementById('galleryTitles').getElementsByTagName("li");
@@ -85,8 +85,8 @@ var photoApp = {
     console.log(titleIndex);
     var photoIndex = titleID.substring(titleIndex);
     console.log(photoIndex);
-    var selectPhoto = photoApp.photoAlbum[photoIndex];
-    console.log(selectPhoto);
+    var selectedPhoto = photoApp.photoAlbum[photoIndex];
+    console.log(selectedPhoto);
     var photoTags = document.getElementById("selectedTitles").getElementsByTagName("p");
     console.log(photoTags);
     photoTags[0].innerText = selectedTitles.title;
