@@ -89,9 +89,9 @@ var photoApp = {
     console.log(selectedPhoto);
     var photoTags = document.getElementById("selectedTitles").getElementsByTagName("p");
     console.log(photoTags);
-    photoTags[0].innerText = selectedTitles.title;
-    photoTags[1].innerText = selectedTitles.location;
-    photoTags[2].innerText = selectedTitles.url;
+    photoTags[0].innerText = selectedPhoto.title;
+    photoTags[1].innerText = selectedPhoto.location;
+    photoTags[2].innerText = selectedPhoto.url;
   }
 
 };
