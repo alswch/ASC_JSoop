@@ -2,17 +2,22 @@
 var multiplier = {
   lastvalue: 1,
 
-  multiply: function(a) {
-    // console.log("==multiply==");
-    console.log(a);
-    console.log(typeof a);
-    var b = a * this.lastvalue;
-    console.log(this.lastvalue);
-    this.lastvalue = b;
+  multiply: function(num) {
+    var self = this;
+    console.log("num:", num);
+    var b = (num * self.lastvalue);
+    multiplier.lastvalue = b;
     console.log(b);
+    return b;
   },
+  getCurrentValue: function() {
+    var currentValue = multiplier.multiply;
+    return lastvalue;
+  }
 }
-multiplier.multiply(1);
+var result = multiplier.multiply(10);
+console.log("==Result:", result);
+var currentValueResult = multiplier.getCurrentValue
 
 
 // Implement an object model that allows you to store strings that represent a Photo.
